@@ -1,0 +1,16 @@
+{
+  "path": "/data/sales.csv",
+  "sha256": "fixture-sha256",
+  "bytes": 123,
+  "delimiter": ",",
+  "totalRows": 5,
+  "columns": ["region", "orders", "revenue"],
+  "rows": [["广州", "3", "0.25"], ["上海", "1", "0"]],
+  "contributingRows": [[3, 3], [1, 0]],
+  "matchedRows": 4,
+  "resultRows": 2,
+  "returnedRows": 2,
+  "offset": 0,
+  "truncated": false,
+  "averageDecimalPlaces": 12
+}

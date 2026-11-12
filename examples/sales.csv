@@ -1,0 +1,6 @@
+region,amount,status
+广州,0.10,paid
+广州,0.20,paid
+上海,10.00,pending
+上海,,paid
+广州,-0.05,paid

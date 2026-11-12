@@ -1,0 +1,74 @@
+{
+  "name": "dsh-csv-analyst",
+  "version": "0.1.0",
+  "description": "Read-only CSV inspection, filtering and exact-decimal aggregation for DeepSeek Harness",
+  "type": "module",
+  "license": "MIT",
+  "author": "ningbo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ningbonb/dsh-csv-analyst.git"
+  },
+  "homepage": "https://github.com/ningbonb/dsh-csv-analyst#readme",
+  "bugs": { "url": "https://github.com/ningbonb/dsh-csv-analyst/issues" },
+  "keywords": ["dsh-plugin", "deepseek-harness", "csv", "data-analysis", "finance"],
+  "engines": { "node": ">=24.9.0", "dsh": "0.2.2-rc.2" },
+  "packageManager": "pnpm@11.28.5",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": { "types": "./lib/index.d.ts", "import": "./lib/index.js" },
+    "./package.json": "./package.json"
+  },
+  "files": ["lib", "cordis.patch.yml", "README.md", "README.zh.md", "SECURITY.md", "LICENSE"],
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "oxlint --deny-warnings src tests scripts",
+    "pack:check": "node scripts/check-package.mjs",
+    "host:check": "node scripts/verify-host.mjs",
+    "check": "pnpm typecheck && pnpm lint && pnpm test:coverage && pnpm build && pnpm pack:check",
+    "prepublishOnly": "pnpm check"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "3.19.0",
+    "decimal.js": "10.6.0",
+    "papaparse": "5.5.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-error": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-attachment": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-package-manifest": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-fs": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-working-directory": "0.2.2-rc.2"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-agent": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-session": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-attachment": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-package-manifest": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-error": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-fs": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-fs-local": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-system-prompt": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-tool-executor-native": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-working-directory": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-session-projection": "0.2.2-rc.2",
+    "@deepseek-ai/dsh-llm": "0.2.2-rc.2",
+    "@types/node": "24.10.0",
+    "@types/papaparse": "5.5.2",
+    "@vitest/coverage-v8": "4.1.12",
+    "fast-check": "4.9.0",
+    "oxlint": "1.81.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.12"
+  }
+}
