@@ -10,7 +10,7 @@ export const fileParameters = {
 /** Inspection inputs. */
 export const inspectParameters = {
   ...fileParameters,
-  sample_rows: { type: 'integer', description: 'Preview record count, from 0 to the configured page limit. Defaults to 5 or the page limit, whichever is smaller.' },
+  sample_rows: { type: 'integer', description: 'Preview record count. Omit for the configured default.' },
 } as const
 
 /** Declarative query inputs; no SQL, JavaScript, regular expressions, or formulas. */
@@ -59,7 +59,7 @@ export const queryParameters = {
     },
   },
   offset: { type: 'integer', description: 'Zero-based output row offset. Defaults to 0. Each page rereads the source; compare sha256 across pages.' },
-  limit: { type: 'integer', description: 'Returned output row count, from 1 to the configured page limit. Defaults to 100 or that limit, whichever is smaller.' },
+  limit: { type: 'integer', description: 'Returned output row count. Omit for the configured default.' },
 } as const
 
 const sourceProperties = {

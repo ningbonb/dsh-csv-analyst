@@ -13,6 +13,10 @@ export interface Config {
   maxCellChars: number
   /** Maximum returned rows per page. */
   maxReturnedRows: number
+  /** Default preview size, capped by maxReturnedRows. */
+  defaultPreviewRows: number
+  /** Default query page size, capped by maxReturnedRows. */
+  defaultPageRows: number
   /** Maximum filters, selected columns, group columns, metrics or sort keys. */
   maxOperations: number
   /** Maximum distinct aggregation groups. */
@@ -34,6 +38,8 @@ export const Config: Schema<Partial<Config>, Config> = Schema.object({
   maxColumns: Schema.number().step(1).min(1).max(1000).default(200),
   maxCellChars: Schema.number().step(1).min(1).max(100_000).default(4096),
   maxReturnedRows: Schema.number().step(1).min(1).max(10_000).default(200),
+  defaultPreviewRows: Schema.number().step(1).min(0).max(10_000).default(5),
+  defaultPageRows: Schema.number().step(1).min(1).max(10_000).default(100),
   maxOperations: Schema.number().step(1).min(1).max(100).default(20),
   maxGroups: Schema.number().step(1).min(1).max(100_000).default(10_000),
   maxOutputBytes: Schema.number().step(1).min(1).max(8 * 1024 * 1024).default(256 * 1024),

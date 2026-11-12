@@ -86,7 +86,7 @@
         },
         "sample_rows": {
           "type": "integer",
-          "description": "Preview record count, from 0 to the configured page limit. Defaults to 5 or the page limit, whichever is smaller."
+          "description": "Preview record count, from 0 to 200. Defaults to 5."
         }
       },
       "required": [
@@ -241,7 +241,7 @@
         },
         "limit": {
           "type": "integer",
-          "description": "Returned output row count, from 1 to the configured page limit. Defaults to 100 or that limit, whichever is smaller."
+          "description": "Returned output row count, from 1 to 200. Defaults to 100."
         }
       },
       "required": [

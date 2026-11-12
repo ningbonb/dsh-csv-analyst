@@ -50,6 +50,7 @@ describe('configuration admission', () => {
     expect(Config({})).toEqual({
       maxBytes: 8388608, maxRows: 100000, maxColumns: 200, maxCellChars: 4096,
       maxReturnedRows: 200, maxOperations: 20, maxGroups: 10000,
+      defaultPreviewRows: 5, defaultPageRows: 100,
       maxOutputBytes: 262144, maxNumericDigits: 100, averageDecimalPlaces: 12, batchRows: 1000,
     })
   })
@@ -58,6 +59,7 @@ describe('configuration admission', () => {
     { maxColumns: -1 }, { maxCellChars: 0 }, { maxReturnedRows: 0 },
     { maxOperations: 101 }, { maxGroups: 0 }, { maxOutputBytes: 0 },
     { maxNumericDigits: 0 }, { averageDecimalPlaces: -1 }, { averageDecimalPlaces: 101 }, { batchRows: 0 },
+    { defaultPreviewRows: -1 }, { defaultPageRows: 0 },
   ])('refuses invalid configuration %j', values => {
     expect(() => Config(values)).toThrow()
   })

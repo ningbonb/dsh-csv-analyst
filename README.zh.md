@@ -82,6 +82,8 @@ dsh plugin --profile web remove dsh-csv-analyst
 | `maxColumns` | 200 | 列数上限 |
 | `maxCellChars` | 4096 | 单个表头或单元格的 UTF-16 码元上限 |
 | `maxReturnedRows` | 200 | 预览或结果页的行数上限 |
+| `defaultPreviewRows` | 5 | 默认预览行数，不超过 `maxReturnedRows`；零表示不预览 |
+| `defaultPageRows` | 100 | 默认查询页大小，不超过 `maxReturnedRows` |
 | `maxOperations` | 20 | 每个显式选列/筛选/分组/指标/排序列表的项目上限 |
 | `maxGroups` | 10000 | 聚合分组数量上限 |
 | `maxOutputBytes` | 262144 | 标准返回 JSON 的 UTF-8 字节上限 |

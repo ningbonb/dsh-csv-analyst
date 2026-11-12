@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { createRequire } from 'node:module'
 import { parseArgs } from 'node:util'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -118,6 +118,14 @@ try {
     await writeFile(resolve(values.record), projected)
   }
   if (recorded) assert.deepEqual(calls.map(event => ({ name: event.data.name, arguments: JSON.parse(event.data.arguments) })), recorded.filter(event => event.type === 'tool/call').map(event => ({ name: event.data.name, arguments: JSON.parse(event.data.arguments) })))
+  if (recorded) {
+    const expectedSchemas = JSON.parse(await readFile(join(dirname(resolve(values.replay)), 'tool-schemas.expected.json'), 'utf8'))
+    const csvSchemas = schemas => schemas.filter(schema => ['csv_inspect', 'csv_query'].includes(schema.name))
+    const actualSchemas = events.find(event => event.type === 'request/header').data.header.tools
+    assert.equal(csvSchemas(actualSchemas).length, 2)
+    assert.equal(csvSchemas(expectedSchemas).length, 2)
+    assert.deepEqual(csvSchemas(actualSchemas), csvSchemas(expectedSchemas))
+  }
   console.log(`PASS ${values.record ? 'live configured model' : 'keyless recorded model'} → actual CSV tools → persisted Session; source file unchanged.`)
   execute(pnpm, ['dsh', 'plugin', '--profile', 'csv-release', 'remove', 'dsh-csv-analyst'])
   const profile = JSON.parse(await readFile(join(home, 'profiles/csv-release/package.json'), 'utf8'))

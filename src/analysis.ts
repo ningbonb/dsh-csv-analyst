@@ -67,7 +67,7 @@ function unique(values: readonly string[], label: string): void {
  */
 export async function inspectTable(table: Table, args: InspectArgs, source: Source, config: Config, signal: AbortSignal): Promise<InspectResult> {
   signal.throwIfAborted()
-  const limit = pageInteger(args.sample_rows ?? Math.min(5, config.maxReturnedRows), 0, config.maxReturnedRows, 'sample_rows')
+  const limit = pageInteger(args.sample_rows ?? Math.min(config.defaultPreviewRows, config.maxReturnedRows), 0, config.maxReturnedRows, 'sample_rows')
   const quality = table.columns.map(column => ({ column, blankCells: 0, decimalCells: 0, otherCells: 0 }))
   for (const [index, row] of table.rows.entries()) {
     await checkpoint(index, config, signal)
@@ -104,7 +104,7 @@ interface OutputRow {
 export async function queryTable(table: Table, args: QueryArgs, source: Source, config: Config, signal: AbortSignal): Promise<QueryResult> {
   signal.throwIfAborted()
   const offset = pageInteger(args.offset ?? 0, 0, Number.MAX_SAFE_INTEGER, 'offset')
-  const limit = pageInteger(args.limit ?? Math.min(100, config.maxReturnedRows), 1, config.maxReturnedRows, 'limit')
+  const limit = pageInteger(args.limit ?? Math.min(config.defaultPageRows, config.maxReturnedRows), 1, config.maxReturnedRows, 'limit')
   const filters = args.filters ?? []
   const metrics = args.metrics ?? []
   const groupColumns = args.group_by ?? []

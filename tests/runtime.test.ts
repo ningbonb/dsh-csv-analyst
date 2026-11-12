@@ -167,4 +167,9 @@ describe('real Cordis, filesystem and native tool pipeline', () => {
       expect(ctx.tools.get(name)!.presentCall?.({ path: 'sales.csv' })).toMatchObject({ card: 'generic', kind: 'read', locations: [{ path: 'sales.csv' }] })
     }
   })
+  it('shows the effective configured defaults and caps in model-facing schemas', async () => {
+    await mount({ maxReturnedRows: 2, defaultPreviewRows: 1, defaultPageRows: 10 })
+    expect(JSON.stringify(ctx.tools.get('csv_inspect')!.parameters)).toContain('from 0 to 2. Defaults to 1.')
+    expect(JSON.stringify(ctx.tools.get('csv_query')!.parameters)).toContain('from 1 to 2. Defaults to 2.')
+  })
 })

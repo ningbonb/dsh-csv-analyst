@@ -84,6 +84,8 @@ Override the row in your profile's `cordis.patch.yml`. DSH replaces its entire c
 | `maxColumns` | 200 | Header field cap |
 | `maxCellChars` | 4096 | UTF-16 code units per header or cell |
 | `maxReturnedRows` | 200 | Maximum preview or result page size |
+| `defaultPreviewRows` | 5 | Default preview size, capped by `maxReturnedRows`; zero disables previews |
+| `defaultPageRows` | 100 | Default query page size, capped by `maxReturnedRows` |
 | `maxOperations` | 20 | Maximum entries per explicit select/filter/group/metric/sort list |
 | `maxGroups` | 10000 | Distinct aggregate group cap |
 | `maxOutputBytes` | 262144 | UTF-8 byte cap for the serialized result |

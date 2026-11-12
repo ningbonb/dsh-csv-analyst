@@ -24,6 +24,12 @@ describe('inspection and exact aggregate statistics', () => {
     expect(empty.sampleTruncated).toBe(false)
     expect(empty.quality[0]).toEqual({ column: 'x', blankCells: 0, decimalCells: 0, otherCells: 0 })
   })
+  it('uses configured preview and query defaults without changing page caps', async () => {
+    const limits = config({ defaultPreviewRows: 2, defaultPageRows: 3 })
+    expect((await inspectTable(sales, { path: '/x' }, source, limits, signal)).sample).toHaveLength(2)
+    expect((await query({}, sales, limits)).returnedRows).toBe(3)
+    expect((await inspectTable(sales, { path: '/x' }, source, config({ defaultPreviewRows: 0 }), signal)).sample).toEqual([])
+  })
   it('uses exact-decimal sum, average, extrema and per-metric contributing counts', async () => {
     const result = await query({
       filters: [{ column: 'status', op: 'eq', value: 'paid' }],
