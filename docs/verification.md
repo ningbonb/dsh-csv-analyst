@@ -1,4 +1,4 @@
-# Release verification: 0.1.0
+# Release verification
 
 Verification date: 2026-11-12. Host baseline: DeepSeek Harness `0.2.2-rc.2`, upstream commit `e8f7b93a344964de3dca1ace9e72b6e4d6de87cb`. Local environment: macOS arm64, Node `25.6.1`, pnpm `11.28.5`.
 
@@ -22,8 +22,16 @@ The synthetic five-record example produced exactly two tool calls: `csv_inspect`
 
 A separate local built-artifact calculation parsed and summed 100,000 synthetic records (1,540,013 input bytes). The independently expected result was `100000` records and exact sum `4999500`; both assertions passed. One observed parse-plus-analysis run took approximately 113 ms and had a final process RSS of 135 MiB. This is one machine's observation, not peak memory, a repeated benchmark, a performance guarantee or a comparison with another implementation.
 
+## Web screenshots
+
+The `0.1.1` images in `docs/screenshots/` show the real Web application from the same host baseline and the plugin's local `0.1.1` tree. A scratch Harness home, synthetic CSV workspace and isolated browser context kept personal sessions out of the images. The in-browser directory picker was selected through the shipped test overlay; no conversation events, tool values or model replies were injected.
+
+A live configured `deepseek-flash` model completed the analysis; a follow-up requested a concise report without business assumptions. The screenshots show that follow-up report and the actual grouped `csv_query` result, including four matched records and numeric-contribution counts. One earlier numeric filter omitted `mode: decimal` and was rejected before the model corrected it; the model also ran a no-op `printf` despite the prompt asking for CSV tools only. This demonstrates model behavior, not a plugin sandbox exemption or a guarantee of perfect model instruction-following.
+
+The built-in browser allowed inspection but refused filesystem screenshot export. The existing repository Playwright driver with system Chrome saved both images from the same persisted live-model session at 1440 × 850; the overview frame and result-detail frame were visually reviewed. Screenshots contain no API key, authentication URL or real customer data, and the source CSV remained unchanged.
+
 ## Remaining limits
 
-The end-to-end recorded model scenario exercises the Native executor. PTC receives the same schema-defined canonical values through DSH's existing tool mechanism, but this release does not claim a separate real-model PTC run. Web/desktop installation uses the same profile and tool services; no custom GUI is introduced and no browser visual claim is made.
+The end-to-end recorded model scenario exercises the Native executor. PTC receives the same schema-defined canonical values through DSH's existing tool mechanism, but this release does not claim a separate real-model PTC run. No custom GUI is introduced; the screenshots establish only the captured Web views, not a desktop visual test.
 
-Only the pinned host release has compatibility evidence. CSV parsing and final sorting are synchronous within resource limits; cancellation is cooperative, not a hard CPU deadline. Read permissions and provider confidentiality belong to the host configuration. The plugin cannot verify whether a business export is authentic, deduplicated or a complete statement of payments.
+The documented host baseline has compatibility evidence; it is not an installation restriction. The plugin performs no version check, and broader compatibility is not established merely by removing version limits. CSV parsing and final sorting are synchronous within resource limits; cancellation is cooperative, not a hard CPU deadline. Read permissions and provider confidentiality belong to the host configuration. The plugin cannot verify whether a business export is authentic, deduplicated or a complete statement of payments.

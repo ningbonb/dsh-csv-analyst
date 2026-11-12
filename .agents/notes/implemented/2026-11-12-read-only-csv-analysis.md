@@ -1,6 +1,6 @@
 # Read-only, complete-file CSV analysis
 
-The CSV tools extend DSH through `tools`, `fs` and `workingDirectory`; they do not introduce a competing filesystem provider, application launcher or model loop. The bundle pins its tested DSH release so incompatible host APIs fail at profile admission rather than during a user task.
+The CSV tools extend DSH through `tools`, `fs` and `workingDirectory`; they do not introduce a competing filesystem provider, application launcher or model loop. Development versions are documented as verification evidence only. Engine restrictions and bounded host peer ranges are omitted so the plugin does not block users solely because their DSH version differs.
 
 Statistics cover the complete byte-bounded input. Record, group, digit and output caps reject the operation instead of publishing partial totals. Pagination applies after filtering and aggregation. All results include counts and a byte digest so users can identify sampling and changed source files.
 

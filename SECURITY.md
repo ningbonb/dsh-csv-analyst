@@ -2,7 +2,7 @@
 
 ## Supported release
 
-Report vulnerabilities for the current npm release on DSH `0.2.2-rc.2`. Compatibility with other host versions is not established.
+Report vulnerabilities for the current npm release and include the DSH and Node versions you used. The development baseline is DSH `0.2.2-rc.2`; versions are not checked or restricted by the plugin. Other host versions have not all been verified.
 
 ## Threat model
 

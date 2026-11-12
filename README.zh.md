@@ -6,9 +6,17 @@
 
 与“让模型写一段脚本计算”不同：插件不运行生成的代码，金额求和保留精确的小数与大整数位数，每次结果都区分原始记录、匹配记录、聚合行和本页行数。空金额与错误金额不会悄悄变成零。
 
+## 页面效果
+
+以下截图来自真实 DSH Web 页面，使用内置的合成示例 `sales.csv` 和真实模型，不是效果图。第一张是模型按追问整理的简洁报表，第二张展开了实际分组查询的返回数据。模型文字说明不等于业务审计结论。
+
+![DSH CSV 分析：已付订单、精确金额汇总及单独统计的缺失金额](https://raw.githubusercontent.com/ningbonb/dsh-csv-analyst/main/docs/screenshots/sales-overview.png)
+
+![DSH 查询详情：原始记录数、分组金额字符串及各指标实际参与记录数](https://raw.githubusercontent.com/ningbonb/dsh-csv-analyst/main/docs/screenshots/tool-details.png)
+
 ## 安装和卸载
 
-当前仅验证并严格支持 **DSH `0.2.2-rc.2`**，要求 **Node 24.9 及以上**。其他 DSH 版本会被兼容性检查拒绝，不能把未测试版本当作已支持。全局 `dsh --version` 与源码仓库的 `pnpm dsh --version` 可能不同。
+本插件基于 **DSH `0.2.2-rc.2`**、**Node `25.6.1`** 开发和测试。这些版本仅用于标注开发基线：插件不声明 engines 限制，不限定宿主 peer 依赖版本，也不在运行时校验版本。其他 DSH 版本可直接尝试使用，不会被插件主动拦截；但这不代表未来所有 API 变化都已验证兼容。全局 `dsh --version` 与源码仓库的 `pnpm dsh --version` 可能不同。
 
 ```sh
 dsh plugin --profile web add dsh-csv-analyst

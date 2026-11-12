@@ -6,9 +6,17 @@ A read-only CSV analyst for [DeepSeek Harness](https://github.com/deepseek-ai/de
 
 **Why a plugin rather than another prompt?** The model does not write or run a calculation script. Decimal sums preserve cents and large integer digits; every result distinguishes input records, matched records, aggregate rows and the returned page. Missing and invalid numbers are not silently converted to zero.
 
+## See it in action
+
+Real DSH Web screenshots using the bundled synthetic `sales.csv` and a live model, not a mockup. The first view is the model's concise follow-up report; the second opens the actual grouped query result. The model's prose is not a business audit.
+
+![DSH CSV analysis: paid orders, exact decimal totals and separately counted missing amounts](https://raw.githubusercontent.com/ningbonb/dsh-csv-analyst/main/docs/screenshots/sales-overview.png)
+
+![DSH query details: source record counts, grouped decimal strings and contributing record counts](https://raw.githubusercontent.com/ningbonb/dsh-csv-analyst/main/docs/screenshots/tool-details.png)
+
 ## Install
 
-Tested and intentionally version-gated to **DSH `0.2.2-rc.2`**, Node **24.9 or later**. Other DSH releases are refused until separately tested. Your shell's `dsh --version` may differ from a source checkout's `pnpm dsh --version`.
+Developed and tested with **DSH `0.2.2-rc.2`** and **Node `25.6.1`**. These versions document the development baseline only: the plugin declares no engine restrictions, leaves host peer versions unrestricted, and performs no runtime version check. You can use other DSH versions without a plugin-imposed version gate; this does not establish compatibility with every future API change. Your shell's `dsh --version` may differ from a source checkout's `pnpm dsh --version`.
 
 ```sh
 dsh plugin --profile web add dsh-csv-analyst
